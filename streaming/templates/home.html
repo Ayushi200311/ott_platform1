@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <div class="scroll-container">
+    <div class="scroll-track" id="scrollTrack">
+      <img src="{% static 'images/ss1.jpg' %}" alt="Banner 1" class="scroll-img">
+      <img src="{% static 'images/ss2.jpg' %}" alt="Banner 2" class="scroll-img">
+      <img src="{% static 'images/ss3.jpg' %}" alt="Banner 3" class="scroll-img">
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const track = document.getElementById("scrollTrack");
+  const images = document.querySelectorAll(".scroll-img");
+  const total = images.length;
+  let index = 0;
+
+  setInterval(() => {
+    index = (index + 1) % total;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }, 4000);
+</script>
+
+{% if request.session.login_success %}
+<script>
+  alert("Login Successful!");
+</script>
+{% endif %}
+{% endblock %}
+
