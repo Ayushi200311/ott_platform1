@@ -2,7 +2,6 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  font-size: 14px;
   transition: background 0.3s, color 0.3s;
 }
 .dark {
@@ -14,16 +13,34 @@ body {
   color: #000;
 }
 
+.logo-img {
+  height: 80px;
+  object-fit: contain;
+  display: none;
+}
+
+.dark .dark-logo {
+  display: block;
+}
+
+.light .light-logo {
+  display: block;
+}
 
 
 /* ===== Header ===== */
 header {
+  position: fixed; /* changed from static to fixed */
+  top: 0;
+  left: 0;
+  right: 0; /* ensures it stretches full width */
   padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 80px;
   transition: background 0.3s;
+  z-index: 1000; /* keeps it above other elements */
 }
 .dark header {
   background-color: #050a30;
@@ -33,7 +50,7 @@ header {
 }
 
 .logo img {
-  height: 100px;
+  height: 80px;
   object-fit: contain;
 }
 
@@ -50,7 +67,7 @@ nav {
 }
 nav a {
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
 }
 .dark nav a {
   color: #fff;
@@ -295,7 +312,7 @@ input:checked + .slider:before {
 }
 
 /* ===== Responsive Styles ===== */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   header {
     flex-direction: column;
     height: auto;
@@ -315,14 +332,77 @@ input:checked + .slider:before {
     flex-direction: column;
     gap: 10px;
   }
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* Base logo styles */
+.logo img {
+  height: 50px;
+  display: none;
+}
+.light .light-logo {
+  display: block;
+}
+.dark .dark-logo {
+  display: block;
 }
 
+/* Menu toggle button (only visible on small screens) */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
 
+/* Responsive nav styling */
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    z-index: 1001;
+  }
 
+  nav {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 240px;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 20px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
 
+  nav.show {
+    transform: translateX(0);
+  }
 
-
-
-
-
-
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  .search-container{
+    margin: 6px 6px;
+  }
+.search-container input {
+  width: 0px;
+}
+}
