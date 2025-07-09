@@ -1,0 +1,106 @@
+{% extends 'streaming/base.html' %}
+{% load static %}
+
+{% block title %}{{ section_title }} - Stream View{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Carousel -->
+<div class="hero-carousel">
+    <div class="slides-container" id="slides-container">
+        {% for slide in hero_slides %}
+        <div class="hero-slide {% if forloop.first %}active{% endif %}">
+            <div class="hero-background" style="background-image: url('{% static slide.image %}');">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <div class="container">
+                    <div class="hero-info">
+                        <div class="badges">
+                            {% if slide.is_vip %}
+                            <span class="badge badge-vip">VIP</span>
+                            {% endif %}
+                            <span class="badge badge-genre">{{ slide.genre }}</span>
+                        </div>
+                        <h1 class="hero-title">{{ slide.title }}</h1>
+                        <div class="hero-rating">
+                            <i class="fas fa-star"></i>
+                            <span class="rating-score">{{ slide.rating }}</span>
+                            <span class="rating-year">• {{ slide.year }}</span>
+                        </div>
+                        <p class="hero-description">{{ slide.description }}</p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-nav prev" onclick="changeSlide(-1)">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="carousel-nav next" onclick="changeSlide(1)">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+    <div class="carousel-dots">
+        {% for slide in hero_slides %}
+        <button class="dot {% if forloop.first %}active{% endif %}" onclick="goToSlide({{ forloop.counter0 }})"></button>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Media Sections -->
+<div class="media-sections">
+    <!-- Featured FREE Section -->
+    <section class="media-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{{ section_title }}</h2>
+                <div class="section-nav">
+                    <button class="nav-btn" onclick="scrollMediaSection('free', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="nav-btn" onclick="scrollMediaSection('free', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="media-carousel" id="free-carousel">
+                {% for item in media_items %}
+                <div class="media-card">
+                    <div class="card-image">
+                        <img src="{% static item.image %}" alt="{{ item.title }}">
+                        {% if item.is_vip %}
+                        <span class="vip-badge">VIP</span>
+                        {% endif %}
+                        <div class="play-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">{{ item.title }}</h3>
+                        <div class="card-meta">
+                            <i class="fas fa-star"></i>
+                            <span>{{ item.rating }}</span>
+                            <span>•</span>
+                            <span>{{ item.year }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

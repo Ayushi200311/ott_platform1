@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}My OTT{% endblock %}</title>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+   <!-- CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/header.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  
+  <!-- Header -->
+  {% include 'partials/header.html' %}
+
+  <!-- Auth Popup -->
+  {% include 'partials/auth_popup.html' %}
+
+  <!-- Signup Success Alert -->
+  {% if signup_success %}
+  <div id="signup_success_flag" style="display: none;"></div>
+  <script>
+      alert("Registration Successful!");
+  </script>
+  {% endif %}
+
+  <!-- Email already exists Alert -->
+  {% if error == "email_exists" %}
+  <script>
+      alert("Email already exists!");
+  </script>
+  {% endif %}
+
+  <!-- Main Content Area -->
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- Footer -->
+  {% include 'partials/footer.html' %}
+
+  <!-- JS Variables -->
+  {% comment %} <script>
+    const REGISTER_URL = "{% url 'register' %}";
+  </script> {% endcomment %}
+  <script>
+  const REGISTER_URL = "{% url 'streaming:register' %}";
+</script>
+
+  <!-- JS Files (placed at end of body for better performance) -->
+  {% block extra_js %}{% endblock %}
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/home.js' %}"></script>
+  <script src="{% static 'js/auth.js' %}"></script>
+  <script src="{% static 'js/theme-toggle.js' %}"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+

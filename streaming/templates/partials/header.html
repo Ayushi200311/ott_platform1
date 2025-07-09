@@ -27,16 +27,16 @@
   </div>
 
   <nav>
-    <a href="#" class="active">Home</a>
-    <a href="#">FREE</a>
-    <a href="#">Sort Series</a>
-    <a href="#">K-Drama</a>
-    <a href="#">C-Drama</a>
-    <a href="#">Thai-Drama</a>
-    <a href="#">Reality Show</a>
-    <a href="#">Movies</a>
-    <a href="#">Anime</a>
-    <a href="#">All</a>
+    <a href="{% url 'streaming:home' %}">Home</a>
+    <a href="{% url 'streaming:free' %}">FREE</a>
+    <a href="{% url 'streaming:sortseries' %}">Sort Series</a>
+    <a href="{% url 'streaming:kdrama' %}">K-Drama</a>
+    <a href="{% url 'streaming:cdrama' %}">C-Drama</a>
+    <a href="{% url 'streaming:thaidrama' %}">Thai-Drama</a>
+    <a href="{% url 'streaming:reality_show' %}">Reality Show</a>
+    <a href="{% url 'streaming:movies' %}">Movies</a>
+    <a href="{% url 'streaming:anime' %}">Anime</a>
+    <a href="{% url 'streaming:all' %}">All</a>
   </nav>
 
   <div class="search-container">
