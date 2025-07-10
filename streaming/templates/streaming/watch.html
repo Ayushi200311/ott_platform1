@@ -1,0 +1,142 @@
+{% extends 'streaming/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ series.title }} - Season {{ series.season }} Episode {{ series.episode }}
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/watch.css' %}">
+{% endblock %}
+
+{% block content %}
+ <div class="video-wrapper" id="videoWrapper">
+  <video id="video" class="video" controls poster="{% static 'images/placeholder.svg' %}">
+    <source src="{{ series.videoUrl|default:''|safe }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Custom Controls -->
+  <div class="video-controls" id="videoControls">
+    <button onclick="seekVideo(-10)"><i class="fas fa-backward"></i></button>
+    <button onclick="togglePlayPause()" id="playPauseBtn"><i class="fas fa-play"></i></button>
+    <button onclick="seekVideo(10)"><i class="fas fa-forward"></i></button>
+  </div>
+</div>
+
+ 
+
+
+  <!-- Info Section -->
+  <section class="info">
+    <div class="breadcrumbs">
+      <a href="/">Home</a> ›
+      <a href="#">Shows</a> ›
+      <a href="#">{{ series.title }}</a> ›
+      Season {{ series.season }} › Episode {{ series.episode }}
+    </div>
+
+    {% comment %} <h1>{{ series.title }}</h1> {% endcomment %}
+    <div class="title-actions">
+      <h1>{{ series.title }}</h1>
+      <div class="actions">
+        <button class="add"><i class="fas fa-plus"></i> Add to My List</button>
+        <button class="share"><i class="fas fa-share-alt"></i> Share</button>
+      </div>
+    </div>
+    <p class="episode-title">Season {{ series.season }} Episode {{ series.episode }}: {{ series.episodeTitle }}</p>
+
+    <div class="meta">
+      <span class="rating"><i class="fas fa-star"></i> {{ series.rating }}</span>
+      <span>{{ series.year }}</span>
+      <span class="badge">{{ series.genre }}</span>
+    </div>
+
+    {% comment %} <div class="actions">
+      <button class="add"><i class="fas fa-plus"></i> Add to My List</button>
+      <button class="share"><i class="fas fa-share-alt"></i> Share</button>
+    </div> {% endcomment %}
+
+    <!-- Cast Row -->
+    <div class="section-header">
+      <h3>Cast</h3>
+    </div>
+    <div class="cast-carousel">
+      {% for actor in series.cast %}
+        <div class="cast-member">
+          <div class="circle-image">
+            {% comment %} <img src="{{ actor.image }}" alt="{{ actor.name }}"> {% endcomment %}
+            <img src="{% static 'images/' %}{{ actor.image }}" alt="{{ actor.name }}">
+          </div>
+          <div class="cast-info">
+            <h4>{{ actor.name }}</h4>
+            <p>{{ actor.role }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Description -->
+    <p class="description">{{ series.description }}</p>
+
+    <!-- Episodes Row -->
+    <div class="section-header">
+      <h3>Episodes</h3>
+      <div class="section-nav">
+        <button class="nav-btn prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="nav-btn next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+    <div class="media-carousel" id="episodes-carousel">
+      {% for episode in series.seasons.0.episodes %}
+        <div class="media-card">
+          <div class="card-image">
+            {% comment %} <img src="{{ episode.thumbnail }}" alt="{{ episode.title }}"> {% endcomment %}
+            <img src="{% static 'images/' %}{{ show.thumbnail }}" alt="{{ show.title }}">
+            <div class="play-overlay">
+              <a href="#" class="play-btn"><i class="fas fa-play"></i></a>
+            </div>
+          </div>
+          <div class="card-info">
+            <h4>{{ episode.number }}. {{ episode.title }}</h4>
+            <div class="card-meta">
+              <span>{{ episode.duration }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Recommended Row -->
+    <div class="section-header">
+      <h3>Recommended for You</h3>
+      <div class="section-nav">
+        <button class="nav-btn prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="nav-btn next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+    <div class="media-carousel" id="recommended-carousel">
+      {% for show in series.recommended %}
+        <div class="media-card">
+          <div class="card-image">
+            {% comment %} <img src="{{ show.thumbnail }}" alt="{{ show.title }}"> {% endcomment %}
+            <img src="{% static 'images/' %}{{ show.thumbnail }}" alt="{{ show.title }}">
+            <div class="play-overlay">
+              <a href="#" class="play-btn"><i class="fas fa-play"></i></a>
+            </div>
+          </div>
+          <div class="card-info">
+            <h4>{{ show.title }}</h4>
+            <div class="card-meta">
+              <i class="fas fa-star"></i>
+              <span>{{ show.rating|floatformat:1 }}</span>
+              <span>•</span>
+              <span>{{ show.year }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

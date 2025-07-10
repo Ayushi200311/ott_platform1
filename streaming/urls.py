@@ -29,6 +29,8 @@ urlpatterns = [
     path('movies/', views.movies_page, name='movies'),
     path('anime/', views.anime_page, name='anime'),
     path('all/', views.all_page, name='all'),
+    path('watch/<int:id>/', views.watch, name='watch'),
+
 ]
 
 if settings.DEBUG:

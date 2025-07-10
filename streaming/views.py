@@ -540,3 +540,118 @@ def sort_series_page(request):
         'media_items': free_items
     })
 
+
+from django.shortcuts import render
+
+def watch(request, id):
+    episode = {
+        "title": "Put Your Head On My Shoulder",
+        "season": 1,
+        "episode": 1,
+        "episodeTitle": "Episode 1",
+        "description": "A romantic drama series about two college students who find love in unexpected circumstances. Follow their journey as they navigate the complexities of young love, friendship, and personal growth.",
+        "rating": 4.8,
+        "year": 2024,
+        "genre": "Romance",
+        "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        "cast": [
+            {"name": "Actor A", "role": "Lead", "image": "p1.jpg"},
+            {"name": "Actor B", "role": "Support", "image": "p2.jpeg"}
+        ],
+        "seasons": [
+            {
+                "episodes": [
+                    {
+                        "number": 1,
+                        "title": "Episode 1",
+                        "description": "Episode description...",
+                        "duration": "24m",
+                        "thumbnail": "p8.jpeg"
+                    }
+                ]
+            }
+        ],
+        "recommended": [
+            {
+                "title": "Another Show",
+                "rating": 4.5,
+                "year": 2024,
+                "thumbnail": "p2.jpeg"
+            },
+            {
+                "title": "Another Show",
+                "rating": 4.5,
+                "year": 2024,
+                "thumbnail": "p2.jpeg"
+            },
+            {
+                "title": "Another Show",
+                "rating": 4.5,
+                "year": 2024,
+                "thumbnail": "p2.jpeg"
+            }
+        ]
+    }
+
+    return render(request, 'streaming/watch.html', {
+        'series': episode,
+        'selected_season': 1
+    })
+
+# def watch(request, id):
+#     # Mocked series data
+#     series = {
+#         "title": "Put Your Head On My Shoulder",
+#         "season": 1,
+#         "episode": 1,
+#         "episodeTitle": "Episode 1",
+#         "description": "Episode details here...",
+#         "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+#         "rating": 4.8,
+#         "year": 2024,
+#         "genre": "Romance",
+#         "cast": [
+#             {"name": "Actor A", "role": "Lead", "image": "images/actor1.jpg"},
+#             {"name": "Actor B", "role": "Friend", "image": "images/actor2.jpg"},
+#         ],
+#         "seasons": [
+#             {
+#                 "episodes": [
+#                     {
+#                         "number": 1,
+#                         "title": "Episode 1",
+#                         "description": "Intro episode...",
+#                         "duration": "25m",
+#                         "thumbnail": "images/thumb1.jpg"
+#                     },
+#                     {
+#                         "number": 2,
+#                         "title": "Episode 2",
+#                         "description": "Second episode...",
+#                         "duration": "27m",
+#                         "thumbnail": "images/thumb2.jpg"
+#                     }
+#                 ]
+#             }
+#         ],
+#         "recommended": [
+#             {
+#                 "id": 101,
+#                 "title": "Recommended Show 1",
+#                 "rating": 4.5,
+#                 "year": 2023,
+#                 "thumbnail": "images/reco1.jpg"
+#             },
+#             {
+#                 "id": 102,
+#                 "title": "Recommended Show 2",
+#                 "rating": 4.6,
+#                 "year": 2023,
+#                 "thumbnail": "images/reco2.jpg"
+#             }
+#         ]
+#     }
+
+#     return render(request, 'streaming/watch.html', {'series': series})
+
+

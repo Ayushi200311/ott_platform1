@@ -44,10 +44,16 @@
                         
                         <!-- Actions -->
                         <div class="hero-actions">
-                            <button class="btn btn-primary">
+                            {% comment %} <button class="btn btn-primary">
                                 <i class="fas fa-play"></i>
                                 Watch Now
-                            </button>
+                            </button> {% endcomment %}
+                            {% comment %} <a href="{% url 'watch' slide.id %}" class="btn btn-primary"> {% endcomment %}
+                            <a href="{% url 'streaming:watch' slide.id %}" class="btn btn-primary">
+
+                                <i class="fas fa-play"></i>
+                                Watch Now
+                            </a>
                             <button class="btn btn-secondary">
                                 More Info
                             </button>
@@ -105,9 +111,12 @@
                         
                         <!-- Play Button Overlay -->
                         <div class="play-overlay">
-                            <button class="play-btn">
+                            {% comment %} <button class="play-btn">
                                 <i class="fas fa-play"></i>
-                            </button>
+                            </button> {% endcomment %}
+                            <a href="{% url 'streaming:watch' item.id %}" class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </a>
                         </div>
                     </div>
                     
@@ -154,9 +163,12 @@
                         
                         <!-- Play Button Overlay -->
                         <div class="play-overlay">
-                            <button class="play-btn">
+                            {% comment %} <button class="play-btn">
                                 <i class="fas fa-play"></i>
-                            </button>
+                            </button> {% endcomment %}
+                            <a href="{% url 'streaming:watch' item.id %}" class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </a>
                         </div>
                     </div>
                     
