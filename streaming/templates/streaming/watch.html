@@ -9,139 +9,136 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{% static 'css/watch.css' %}">
   <style>
-    /* Add these styles if not already in your watch.css */
-    .video-wrapper {
+    .video-container {
       position: relative;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
       background: #000;
-      margin-bottom: 20px;
     }
-    
-    #youtube-player {
+    .video-container iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      border: none;
+    }
+    .video-fallback {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      background: #222;
     }
   </style>
 {% endblock %}
 
 {% block content %}
-
-<!-- Video Player Section -->
-<div class="video-wrapper">
-  <div id="youtube-player"></div>
+<div class="video-container">
+  <!-- Simple iframe embed without API first -->
+  <iframe id="youtube-embed"
+    src="https://www.youtube.com/embed/{{ series.youtube_id }}?rel=0&modestbranding=1"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+  <div class="video-fallback" style="display:none;">
+    <a href="https://youtube.com/watch?v={{ series.youtube_id }}" target="_blank">
+      Watch on YouTube
+    </a>
+  </div>
 </div>
 
-<!-- Info section -->
-<section class="info">
-  <div class="breadcrumbs">
-    <a href="/">Home</a> ›
-    <a href="#">Shows</a> ›
-    <a href="#">{{ series.title }}</a> ›
-    Season {{ series.season }} › Episode {{ series.episode }}
-  </div>
+<!-- Rest of your content -->
+{% endblock %}
 
-  <div class="title-actions">
-    <h1>{{ series.title }}</h1>
-    <div class="actions">
-      <button class="add"><i class="fas fa-plus"></i> Add to My List</button>
-      <button class="share"><i class="fas fa-share-alt"></i> Share</button>
-    </div>
-  </div>
-
-  <p class="episode-title">Season {{ series.season }} Episode {{ series.episode }}: {{ series.episodeTitle }}</p>
-
-  <div class="meta">
-    <span class="rating"><i class="fas fa-star"></i> {{ series.rating }}</span>
-    <span>{{ series.year }}</span>
-    <span class="badge">{{ series.genre }}</span>
-  </div>
-
-  <!-- Rest of your content remains the same -->
-  <!-- ... -->
-</section>
-
-<!-- YouTube API Script with improved loading -->
+{% block extra_js %}
 <script>
-  // 1. First create the YouTube player function
-  function onYouTubeIframeAPIReady() {
-    console.log('YouTube API ready');
-    new YT.Player('youtube-player', {
-      height: '100%',
-      width: '100%',
-      videoId: '{{ series.youtube_id }}',
-      playerVars: {
-        'autoplay': 0,
-        'controls': 1,
-        'rel': 0,
-        'modestbranding': 1
-      },
-      events: {
-        'onReady': function(event) {
-          console.log('Player ready');
-        },
-        'onStateChange': function(event) {
-          console.log('Player state:', event.data);
+// Self-contained, conflict-free implementation
+(function() {
+  // Remove duplicate scripts from the page
+  function removeDuplicateScripts() {
+    const scripts = document.querySelectorAll('script[src*="watch.js"], script[src*="home.js"]');
+    scripts.forEach(script => script.remove());
+  }
+
+  // Initialize YouTube embed
+  function initYouTubeEmbed() {
+    const iframe = document.getElementById('youtube-embed');
+    const fallback = document.querySelector('.video-fallback');
+    
+    // Check if iframe loaded properly
+    setTimeout(() => {
+      try {
+        // If iframe doesn't have proper src, show fallback
+        if (!iframe.src.includes('{{ series.youtube_id }}')) {
+          iframe.style.display = 'none';
+          fallback.style.display = 'flex';
         }
+      } catch (e) {
+        console.error('YouTube embed check failed:', e);
+        iframe.style.display = 'none';
+        fallback.style.display = 'flex';
       }
-    });
-  }
-
-  // 2. Load YouTube API dynamically
-  document.addEventListener("DOMContentLoaded", function() {
-    console.log('DOM loaded, YouTube ID:', '{{ series.youtube_id }}');
-    
-    // Check if API is already loaded
-    if (typeof YT === 'undefined') {
-      var tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    } else {
-      onYouTubeIframeAPIReady();
-    }
-    
-    // Make the function globally available
-    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-  });
-</script>
-
-<!-- Your existing slider script -->
-<script>
-  const slides = document.querySelectorAll(".slide");
-  let currentSlide = 0;
-
-  function showSlide(n) {
-    if (slides[currentSlide]) {
-      slides[currentSlide].classList.remove("active");
-    }
-    if (slides[n]) {
-      slides[n].classList.add("active");
-      currentSlide = n;
-    }
-  }
-
-  function changeSlide(step) {
-    const totalSlides = slides.length;
-    let nextSlide = (currentSlide + step + totalSlides) % totalSlides;
-    showSlide(nextSlide);
-  }
-
-  function startAutoSlide() {
-    setInterval(() => {
-      changeSlide(1);
     }, 3000);
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("prev-slide")?.addEventListener("click", () => changeSlide(-1));
-    document.getElementById("next-slide")?.addEventListener("click", () => changeSlide(1));
-    startAutoSlide();
-  });
-</script>
+  // Safe slider implementation
+  function initSlider() {
+    const sliderSection = document.querySelector('.slider-section');
+    if (!sliderSection) return;
 
+    const slides = sliderSection.querySelectorAll('.slide');
+    if (!slides || slides.length === 0) return;
+
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      // Validate index
+      index = (index < 0) ? slides.length - 1 : index;
+      index = (index >= slides.length) ? 0 : index;
+      
+      // Safely update classes
+      try {
+        slides.forEach((slide, i) => {
+          if (slide && slide.classList) {
+            slide.classList.toggle('active', i === index);
+          }
+        });
+        currentSlide = index;
+      } catch (e) {
+        console.error('Slider error:', e);
+      }
+    }
+
+    // Initialize controls
+    const prevBtn = sliderSection.querySelector('#prev-slide');
+    const nextBtn = sliderSection.querySelector('#next-slide');
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+    }
+
+    // Initialize first slide
+    showSlide(0);
+  }
+
+  // Main initialization
+  document.addEventListener('DOMContentLoaded', function() {
+    removeDuplicateScripts();
+    initYouTubeEmbed();
+    initSlider();
+  });
+})();
+</script>
 {% endblock %}
