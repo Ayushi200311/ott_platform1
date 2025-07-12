@@ -5,8 +5,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
 
   <title>Custom Header</title>
+  <script>
+  // Set theme class on body before DOM fully loads
+  (function () {
+    const theme = localStorage.getItem('theme');
+    document.documentElement.className = ''; // Remove existing class if any
+    if (theme === 'dark') {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.add('light');
+    }
+  })();
+</script>
   <style>
 
   </style>
@@ -39,20 +52,32 @@
     <a href="{% url 'streaming:all' %}">All</a>
   </nav>
 
-  <div class="search-container">
-  <input type="text" placeholder="Search..." />
-  <i class="fas fa-search"></i>
-    </div>
+  
 
     <div class="header-right">
-        <div class="btns">
-            <div class="vip-btn active">👑 VIP</div>
-        </div>
-        <div class="btns">
-          {% comment %} <div class="vip login-btn">Login {% endcomment %}
-          <button class="vip" onclick="document.getElementById('auth-popup').style.display = 'flex';">Login</button>
+      <!-- Right Side -->
+    <div class="header-right">
+      <!-- Search -->
+      <div class="search-box">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" placeholder="Search movies, shows..." />
+      </div>
 
-        </div>
+      <!-- VIP Button -->
+      <button class="vip-btn">
+        <i class="fas fa-crown"></i>
+        VIP
+      </button>
+
+      <!-- Profile Icon -->
+      {% comment %} <div class="profile-avatar">
+        <i class="fas fa-user"></i>
+      </div> {% endcomment %}
+       <div onclick="document.getElementById('auth-popup').style.display = 'flex';" class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+        <i class="fas fa-user text-white text-sm"></i>
+      </div>
+    </div>
+
     </div>
         </div>
         <div class="profile-menu">
@@ -74,8 +99,6 @@
                 <span class="slider round"></span>
               </label>
             </div>
-            <a href="#"><i class="fas fa-tv"></i> Activate TV</a>
-            <a href="#"><i class="fas fa-download"></i> Download App</a>
             <a href="#"><i class="fas fa-question-circle"></i> Help Center</a>
           </div>
         </div>

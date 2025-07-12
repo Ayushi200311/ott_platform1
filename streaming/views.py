@@ -553,6 +553,7 @@ def watch(request, id):
         "rating": 4.8,
         "year": 2024,
         "genre": "Romance",
+        "youtube_id": "UDVLn4Xvyz8",
         "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
         "cast": [
             {"name": "Actor A", "role": "Lead", "image": "p1.jpg"},

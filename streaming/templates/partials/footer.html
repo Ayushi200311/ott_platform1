@@ -1,57 +1,101 @@
-<html>
-<head>
-    {% comment %} <link rel="stylesheet" href="{% static 'css/footer.css' %}">   {% endcomment %}
-</head>
-<body class="dark">  
-    <footer class="footer">
-  <div class="footer-container">
-    <div class="signup-section">
-      <p>Ready to watch? Enter your email to create or restart your membership.</p>
-      <div class="email-box">
-        <input type="email" placeholder="Email address">
-        <button>
-          Get Started
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="20" viewBox="0 0 24 24" width="20" stroke="currentColor" stroke-width="2" style="margin-left: 8px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-    </div>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <div class="contact">
-      <p>Questions? Call <a href="tel:000-800-919-1743">000-800-919-1743</a></p>
-    </div>
+<footer class="footer">
 
-    <div class="footer-links">
-      <div>
-        <a href="#">FAQ</a>
-        <a href="#">Investor Relations</a>
-        <a href="#">Privacy</a>
-        <a href="#">Speed Test</a>
+  <!-- Newsletter -->
+  <div class="footer-newsletter">
+    <h3>Stay Updated with Latest Content</h3>
+    <p>Get notified about new movies, shows, and exclusive content delivered to your inbox.</p>
+    <div class="newsletter-form-row">
+      <div class="newsletter-input-wrapper">
+        <i class="fas fa-envelope"></i>
+        <input type="email" placeholder="Enter your email address" />
       </div>
-      <div>
-        <a href="#">Help Centre</a>
-        <a href="#">Jobs</a>
-        <a href="#">Cookie Preferences</a>
-        <a href="#">Legal Notices</a>
-      </div>
-      <div>
-        <a href="#">Account</a>
-        <a href="#">Ways to Watch</a>
-        <a href="#">Corporate Information</a>
-        <a href="#">Only on Netflix</a>
-      </div>
-      <div>
-        <a href="#">Media Centre</a>
-        <a href="#">Terms of Use</a>
-        <a href="#">Contact Us</a>
-      </div>
-    </div>
-
-    <div class="copyright">
-      <p>&copy; 2025 PlayTV. All rights reserved.</p>
+      <button class="subscribe-button">Subscribe</button>
     </div>
   </div>
+
+  <!-- Main Footer -->
+  <div class="footer-main">
+    <div class="footer-grid">
+      
+      <!-- Brand Info -->
+      <div class="footer-brand">
+        {% comment %} <div class="brand-logo">
+          <i class="fas fa-play play-icon"></i>
+          <span class="brand-name">StreamVault</span>
+        </div> {% endcomment %}
+        <div class="logo">
+          <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo-img dark-logo">
+          <img src="{% static 'images/logo4.png' %}" alt="Logo" class="logo-img light-logo">
+        </div>
+        <p>Your ultimate destination for premium streaming content. Watch unlimited movies, TV shows, documentaries, and exclusive originals across all your devices.</p>
+        <div class="contact-info">
+          <p><i class="fas fa-phone"></i> 1-800-STREAM-1</p>
+          <p><i class="fas fa-envelope"></i> support@streamvault.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> Los Angeles, CA 90210</p>
+        </div>
+      </div>
+
+      <!-- Sections -->
+      <div class="footer-section">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Investor Relations</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Device Support</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Content Guidelines</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Features</h4>
+        <ul>
+          <li><a href="#">Download App</a></li>
+          <li><a href="#">Gift Cards</a></li>
+          <li><a href="#">Redeem Code</a></li>
+          <li><a href="#">Ways to Watch</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Footer -->
+  <div class="footer-bottom">
+    <p>© 2024 StreamVault. All rights reserved. |
+      <a href="#">Terms</a> |
+      <a href="#">Privacy</a>
+    </p>
+    <div class="social-links">
+      <span>Follow us:</span>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+
 </footer>
-</body>
-</html>

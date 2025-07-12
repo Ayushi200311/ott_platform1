@@ -1,183 +1,215 @@
-/* ==== COMMON FOOTER STYLES ==== */
 .footer {
-  padding: 10px 0;
-  text-align: left;
+  background-color: #050a30;
+  color: #ccc;
+  font-family: 'Segoe UI', sans-serif;
+  transition: background 0.3s, color 0.3s;
+}
+.light .footer {
+  background-color: #fff;
+  color: #000;
 }
 
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-.signup-section {
+/* Newsletter */
+.footer-newsletter {
+  border-bottom: 1px solid #222;
+  padding: 3rem 1rem;
   text-align: center;
-  margin-bottom: 30px;
 }
-
-.signup-section p {
-  margin-bottom: 15px;
-  font-size: 16px;
+.footer-newsletter h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
 }
-
-.email-box {
+.footer-newsletter p {
+  color: #aaa;
+  margin-bottom: 1.5rem;
+}
+.newsletter-form-row {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 15px;
+  max-width: 600px;
+  margin: 0 auto;
 }
-
-.email-box input {
-  padding: 15px 20px;
-  width: 500px;
-  max-width: 100%;
-  border-radius: 4px;
-  font-size: 18px;
-  outline: none;
-  border: 1px solid;
+.newsletter-input-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
 }
-
-.email-box button {
-  padding: 15px 25px;
-  font-size: 18px;
-  border-radius: 4px;
+.newsletter-input-wrapper i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.newsletter-input-wrapper input {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.5rem;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  background-color: #050a30;
+  color: white;
+}
+.light .newsletter-input-wrapper input {
+  background-color: #f0f0f0;
+  color: #000;
+}
+.subscribe-button {
+  background: linear-gradient(to right, #dc2626, #b91c1c);
+  color: white;
+  padding: 0.75rem 1.5rem;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
 }
 
-.email-box button svg {
-  vertical-align: middle;
+/* Footer Grid */
+.footer-main {
+  padding: 3rem 6rem;
 }
-
-.contact {
-  margin-bottom: 30px;
-  font-size: 14px;
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
 }
-
-.footer-links {
+.footer-brand {
+  grid-column: span 2;
+}
+.brand-logo {
   display: flex;
-  flex-wrap: wrap;
-  gap: 200px;
-  margin-bottom: 30px;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.play-icon {
+  background: linear-gradient(to right, #dc2626, #b91c1c);
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.footer-brand p {
+  margin-bottom: 1rem;
+}
+.contact-info p {
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.contact-info i {
+  color: #ef4444;
 }
 
-.footer-links div {
+/* Section links */
+.footer-section h4 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-section li {
+  margin-bottom: 0.5rem;
+}
+.footer-section a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+.footer-section a:hover {
+  color: white;
+}
+.light .footer-section a {
+  color: #555;
+}
+.light .footer-section a:hover {
+  color: black;
+}
+
+/* Bottom Row */
+.footer-bottom {
+  border-top: 1px solid #1f2937;
+  padding: 1.5rem 6rem;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.875rem;
 }
-
-.footer-links a {
-  font-size: 14px;
-  text-decoration: underline;
+@media (min-width: 768px) {
+  .footer-bottom {
+    flex-direction: row;
+  }
 }
-
-.footer-links a:hover {
+.footer-bottom a {
   text-decoration: none;
+  margin-left: 0.5rem;
+  color: #aaa;
 }
-
-.copyright {
-  font-size: 13px;
-  margin-top: 40px;
-  text-align: center;
-  position: relative;
-  padding-top: 20px;
-}
-
-.copyright::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 1px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-
-
-
-
-
-
-
-
-.dark .footer {
-  background-color: #050a30;
+.footer-bottom a:hover {
   color: white;
 }
+.light .footer-bottom a {
+  color: #555;
+}
+.light .footer-bottom a:hover {
+  color: black;
+}
 
-.dark .footer-container{
-  background-color: #050a30;
+/* Social */
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.social-links i {
+  font-size: 1rem;
+  background-color: #1f2937;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: #9ca3af;
+  transition: all 0.3s ease;
+}
+.social-links i:hover {
+  background-color: #dc2626;
   color: white;
 }
-
-.dark .email-box input {
-  background-color: transparent;
-  color: white;
-  border-color: rgba(255, 255, 255, 0.5);
+.light .social-links i {
+  background-color: #ddd;
+  color: #333;
 }
-
-.dark .email-box input::placeholder {
-  color: #cccccc;
-}
-
-.dark .email-box button {
-  background-color: #e50914;
-  color: white;
-}
-
-.dark .contact a,
-.dark .footer-links a {
-  color: #b3b3b3;
-}
-
-.dark .copyright {
-  color: #cccccc;
-}
-
-.dark .copyright::before {
-  background-color: #cccccc;
-}
-
-
-
-
-.light .footer {
-  background-color: #f8f8f8;
-  color: #222;
-}
-
-.light .footer-container{
-  background-color: #f8f8f8;
-  color: #222;
-}
-
-.light .email-box input {
-  background-color: white;
-  color: #222;
-  border-color: #999;
-}
-
-.light .email-box input::placeholder {
-  color: #888;
-}
-
-.light .email-box button {
+.light .social-links i:hover {
   background-color: #c20000;
   color: white;
 }
 
-.light .contact a,
-.light .footer-links a {
-  color: #444;
+
+
+.footer .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+.footer .logo-img {
+  height: 80px;
+  display: none;
+  object-fit: contain;
+}
+.dark .footer .dark-logo {
+  display: block;
+}
+.light .footer .light-logo {
+  display: block;
 }
 
-.light .copyright {
-  color: #555;
-}
-
-.light .copyright::before {
-  background-color: #bbb;
-}

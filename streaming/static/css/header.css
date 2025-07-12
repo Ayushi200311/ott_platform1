@@ -1,7 +1,8 @@
 /* ===== Base Styles ===== */
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;
+  font-weight: 500;
   transition: background 0.3s, color 0.3s;
 }
 .dark {
@@ -19,13 +20,14 @@ body {
   display: none;
 }
 
-.dark .dark-logo {
+body.dark .dark-logo {
   display: block;
 }
 
-.light .light-logo {
+body.light .light-logo {
   display: block;
 }
+
 
 
 /* ===== Header ===== */
@@ -405,4 +407,184 @@ input:checked + .slider:before {
 .search-container input {
   width: 0px;
 }
+}
+
+
+
+
+
+/* Base header layout */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #000;
+  border-bottom: 1px solid #1f2937;
+  z-index: 999;
+  padding: 0.5rem 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Left Side */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.play-icon {
+  background: linear-gradient(to right, #dc2626, #b91c1c);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 0.75rem;
+}
+
+.brand-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* Navigation */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: white;
+  font-weight: bold;
+}
+
+/* Right Side */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+/* Search Bar */
+.search-box {
+  position: relative;
+  background-color: #111827;
+  border: 1px solid #374151;
+  border-radius: 999px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  margin-right: 6px;
+}
+
+.search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 0.9rem;
+  width: 180px;
+}
+
+/* VIP Button */
+.vip-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(to right, #facc15, #f59e0b);
+  color: black;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: bold;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+/* Notification */
+.notification {
+  position: relative;
+  font-size: 1rem;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.notification-dot {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  background: red;
+  border-radius: 50%;
+}
+
+/* Profile */
+.profile-avatar {
+  background: linear-gradient(to right, #6366f1, #8b5cf6);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Optional: Dark/Light Theming */
+.dark .header {
+  background-color: #050a30;
+  color: white;
+}
+
+.light .header {
+  background-color: white;
+  color: black;
+}
+
+.light .nav-links a {
+  color: #444;
+}
+
+.light .nav-links a.active {
+  color: #c20000;
+}
+
+.light .search-box {
+  background-color: #f0f0f0;
+  border-color: #999;
+}
+
+.light .search-box input {
+  color: black;
+}
+
+.light .notification {
+  color: #444;
 }

@@ -121,3 +121,4 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Carousel initialized with', totalSlides, 'slides');
 });
+
